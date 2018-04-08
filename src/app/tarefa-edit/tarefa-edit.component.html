@@ -1,0 +1,54 @@
+<div *ngIf="tarefa">
+   <!-- <mat-card>
+        <mat-card-header>
+        <button mat-card-avatar mat-mini-fab class="mat-elevation-z0">{{tarefa.points}}</button>
+        <mat-card-title>{{tarefa.taskName | uppercase}}<span *ngIf="tarefa.status"> ({{tarefa.status}})</span></mat-card-title>
+        <mat-card-subtitle>{{tarefa.personName}}<span *ngIf="tarefa.doBefore"> - {{tarefa.doBefore}}</span></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+        <div *ngIf="tarefa.comment">
+        <p>{{tarefa.comment}}</p>
+        <p>&nbsp;</p>
+        </div>
+        <p>{{tarefa.description}}</p>
+        </mat-card-content>
+        </mat-card> -->
+
+   <mat-card>
+      <mat-card-content>         
+         <form>
+            <div>
+               <mat-form-field>
+                  <input matInput name="taskName" placeholder="Tarefa" [(ngModel)]="tarefa.taskName">
+               </mat-form-field><mat-form-field>
+                  <input matInput name="points" placeholder="Pontos" [(ngModel)]="tarefa.points">
+               </mat-form-field><mat-form-field>
+                  <input matInput name="doBefore" placeholder="Prazo" [(ngModel)]="tarefa.doBefore">
+               </mat-form-field>
+            </div>
+            <div>
+               <mat-form-field>
+                  <input matInput name="personName" placeholder="Responsável" [(ngModel)]="tarefa.personName">
+               </mat-form-field><mat-form-field>
+                  <input matInput name="status" placeholder="Status" [(ngModel)]="tarefa.status">
+               </mat-form-field>
+            </div>
+            <div>
+               <mat-form-field>
+                  <textarea matInput name="description" placeholder="Descrição" [(ngModel)]="tarefa.description"></textarea>
+               </mat-form-field>
+            </div>
+            <div>
+               <mat-form-field>
+                  <textarea matInput name="comment" placeholder="Comentário" [(ngModel)]="tarefa.comment"></textarea>
+               </mat-form-field>
+            </div>
+         </form>
+      </mat-card-content>
+      <mat-card-actions>
+         <button mat-button (click)="goBack()">voltar</button>
+         <button mat-raised-button (click)="save()">salvar</button>
+      </mat-card-actions>
+   </mat-card>
+</div>
+

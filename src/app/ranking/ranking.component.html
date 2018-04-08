@@ -1,0 +1,8 @@
+<div>   
+   <mat-card *ngFor="let pessoa of pessoas">
+      <mat-card-header>
+         <button mat-card-avatar mat-mini-fab class="mat-elevation-z0">{{pessoa.points}}</button>
+         <mat-card-title>{{pessoa.name | uppercase}}</mat-card-title>
+      </mat-card-header>
+   </mat-card>
+</div>

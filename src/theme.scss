@@ -1,0 +1,68 @@
+/*
+https://coursetro.com/posts/code/116/Create-your-own-Angular-5-Material-Theme
+https://material.io/guidelines/style/color.html#color-color-palette
+https://material.io/color/#!/?view.left=0&view.right=0&primary.color=66BB6A&secondary.color=A5D6A7
+https://stackoverflow.com/questions/43438305/how-to-change-font-color-of-primary-palette-in-angular-material2/43457066
+https://blog.thoughtram.io/angular/2017/05/23/custom-themes-with-angular-material.html#understanding-mat-palette
+*/
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+@function theme-background($color) {
+    @return (
+        status-bar:               map-get($color, 300),
+        app-bar:                  map-get($color, 100),
+        background:               map-get($color, 50),
+        hover:                    rgba(white, 0.04), 
+        card:                     rgba(white, 0.7),
+        dialog:                   $white-12-opacity,
+        disabled-button:          $white-12-opacity,
+        raised-button:            map-get($color, 400),
+        focused-button:           $white-6-opacity,
+        selected-button:          map-get($color, 900),
+        selected-disabled-button: map-get($color, 800),
+        disabled-button-toggle:   black,
+        unselected-chip:          map-get($color, 700),
+        disabled-list-option:     black,
+    );
+};
+@function theme-foreground($color) {
+    @return (
+        base:              $color,
+        divider:           $black-12-opacity,
+        dividers:          $black-12-opacity,
+        disabled:          rgba($color, 0.38),
+        disabled-button:   rgba($color, 0.38),
+        disabled-text:     rgba($color, 0.38),
+        hint-text:         rgba($color, 0.38),
+        secondary-text:    rgba($color, 0.54),
+        icon:              rgba($color, 0.54),
+        icons:             rgba($color, 0.54),
+        text:              rgba($color, 0.87),
+        slider-min:        rgba($color, 0.87),
+        slider-off:        rgba($color, 0.26),
+        slider-off-active: rgba($color, 0.38),
+    );
+};
+@function create-light-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+    @return (
+        primary: $primary, accent: $accent, warn: $warn,
+        is-dark: false,
+        foreground: theme-foreground(Black),
+        background: theme-background($mat-green),
+    );
+}
+
+$main-primary: mat-palette($mat-light-green);
+$main-accent:  mat-palette($mat-blue-grey);
+$main-warn:    mat-palette($mat-deep-orange);
+$main-theme: create-light-theme($main-primary, $main-accent, $main-warn);
+@include angular-material-theme($main-theme);
+
+$alt-primary: mat-palette($mat-yellow);
+$alt-accent:  mat-palette($mat-grey, 200);
+$alt-theme: mat-dark-theme($alt-primary, $alt-accent);
+.alternative {
+    @include angular-material-theme($alt-theme);
+}
