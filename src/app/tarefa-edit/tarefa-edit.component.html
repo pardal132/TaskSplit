@@ -17,29 +17,27 @@
    <mat-card>
       <mat-card-content>         
          <form>
-            <div>
-               <mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+               <mat-form-field fxFlex>
                   <input matInput name="taskName" placeholder="Tarefa" [(ngModel)]="tarefa.taskName">
-               </mat-form-field><mat-form-field>
-                  <input matInput name="points" placeholder="Pontos" [(ngModel)]="tarefa.points">
-               </mat-form-field><mat-form-field>
+               </mat-form-field><mat-form-field fxFlex>
                   <input matInput name="doBefore" placeholder="Prazo" [(ngModel)]="tarefa.doBefore">
                </mat-form-field>
             </div>
-            <div>
+            <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
                <mat-form-field>
+                  <input matInput name="points" placeholder="Pontos" [(ngModel)]="tarefa.points">
+               </mat-form-field><mat-form-field fxFlex>
                   <input matInput name="personName" placeholder="Responsável" [(ngModel)]="tarefa.personName">
                </mat-form-field><mat-form-field>
                   <input matInput name="status" placeholder="Status" [(ngModel)]="tarefa.status">
                </mat-form-field>
             </div>
-            <div>
-               <mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+               <mat-form-field fxFlex="50">
                   <textarea matInput name="description" placeholder="Descrição" [(ngModel)]="tarefa.description"></textarea>
                </mat-form-field>
-            </div>
-            <div>
-               <mat-form-field>
+               <mat-form-field fxFlex="50">
                   <textarea matInput name="comment" placeholder="Comentário" [(ngModel)]="tarefa.comment"></textarea>
                </mat-form-field>
             </div>

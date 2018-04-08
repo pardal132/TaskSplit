@@ -1,7 +1,7 @@
 <mat-toolbar>
-   <mat-toolbar-row style="padding:0;">
-      <nav mat-tab-nav-bar style="width:100%;">
-         <a mat-tab-link style="width:50%;"
+   <mat-toolbar-row>
+      <nav mat-tab-nav-bar>
+         <a mat-tab-link
             *ngFor="let link of navLinks"
             [routerLink]="link.path"
             routerLinkActive #rla="routerLinkActive"

@@ -1,0 +1,11 @@
+.mat-toolbar-row{
+    padding:0;
+}
+
+nav.mat-tab-nav-bar{
+    width:100%;
+}
+
+a.mat-tab-link{
+    width:50%;
+}
