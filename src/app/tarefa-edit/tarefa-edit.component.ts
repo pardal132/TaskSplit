@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { TarefaService } from '../tarefa.service';
 import { PessoaService } from '../pessoa.service';
+import { LoadingService } from '../loading.service';
 import { Tarefa } from '../tarefa';
 
 @Component({
@@ -18,10 +19,12 @@ export class TarefaEditComponent implements OnInit {
     private route: ActivatedRoute,
     private tarefaService: TarefaService,
     private pessoaService: PessoaService,
+    private loadingService: LoadingService,
     private location: Location
   ) { }
 
   ngOnInit() {
+    this.loadingService.start();
     this.getTarefa();
   }
 
@@ -30,6 +33,7 @@ export class TarefaEditComponent implements OnInit {
     this.tarefaService.getTarefa(id)
         .subscribe(t =>{
           this.tarefa = t[0];
+          this.loadingService.stop();
         });
   }
 

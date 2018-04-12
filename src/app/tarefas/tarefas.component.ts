@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tarefa } from '../tarefa';
 import { TarefaService } from '../tarefa.service';
+import { LoadingService } from '../loading.service';
 
 @Component({
   selector: 'app-tarefas',
@@ -9,14 +10,22 @@ import { TarefaService } from '../tarefa.service';
 })
 export class TarefasComponent implements OnInit {
   tarefas: Tarefa[];
-  constructor(private tarefaService: TarefaService) { }
+
+  constructor(
+    private tarefaService: TarefaService,
+    private loadingService: LoadingService
+  ) { }
 
   ngOnInit() {
+    this.loadingService.start()
     this.getTarefas();
   }
 
   getTarefas(): void{
     this.tarefaService.getTarefas()
-        .subscribe(tarefas => this.tarefas = tarefas);
+        .subscribe(tarefas => {
+          this.tarefas = tarefas;
+          this.loadingService.stop();
+        });
   }
 }

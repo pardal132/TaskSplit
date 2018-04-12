@@ -17,6 +17,8 @@ import { RankingComponent } from './ranking/ranking.component';
 import { AngularModulesModule } from './/angular-modules.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PessoaService } from './pessoa.service';
+import { LoadingService } from './loading.service';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { PessoaService } from './pessoa.service';
     TarefaEditComponent,
     MessagesComponent,
     HomeComponent,
-    RankingComponent
+    RankingComponent,
+    LoadingComponent
   ],
   imports: [
     NoopAnimationsModule,
@@ -41,7 +44,8 @@ import { PessoaService } from './pessoa.service';
   providers: [
     TarefaService,
     MessageService,
-    PessoaService
+    PessoaService,
+    LoadingService
   ],
   bootstrap: [AppComponent]
 })

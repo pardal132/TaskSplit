@@ -1,7 +1,7 @@
 <div class="bottom-right">
    <button mat-mini-fab color="primary" routerLink="/nova">+</button>
 </div>
-<div>   
+<div>
    <mat-card *ngFor="let tarefa of tarefas" routerLink="/tarefa/{{tarefa.idTarefa}}">
       <mat-card-header>
          <button mat-card-avatar mat-mini-fab class="mat-elevation-z0">{{tarefa.points}}</button>

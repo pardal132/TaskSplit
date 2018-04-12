@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
+import { LoadingService } from '../loading.service';
 import { TarefaService } from '../tarefa.service';
 import { Tarefa } from '../tarefa';
 
@@ -16,10 +17,12 @@ export class TarefaDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private tarefaService: TarefaService,
-    private location: Location
+    private location: Location,
+    private loadingService: LoadingService
   ) { }
 
   ngOnInit() {
+    this.loadingService.start();
     this.getTarefa();
   }
 
@@ -28,6 +31,7 @@ export class TarefaDetailComponent implements OnInit {
     this.tarefaService.getTarefa(id)
         .subscribe(t =>{
           this.tarefa = t[0];
+          this.loadingService.stop();
         });
   }
 

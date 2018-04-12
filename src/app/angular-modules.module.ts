@@ -10,6 +10,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {LayoutModule} from '@angular/cdk/layout';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -19,13 +20,13 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatButtonModule, MatCheckboxModule, MatTabsModule, MatToolbarModule,
     MatCardModule, MatFormFieldModule, MatSnackBarModule, MatChipsModule,
     MatDividerModule, MatIconModule, MatInputModule, FlexLayoutModule,
-    LayoutModule,
+    LayoutModule, MatProgressSpinnerModule, 
   ],
   exports: [
     MatButtonModule, MatCheckboxModule, MatTabsModule, MatToolbarModule,
     MatCardModule, MatFormFieldModule, MatSnackBarModule, MatChipsModule,
     MatDividerModule, MatIconModule, MatInputModule, FlexLayoutModule,
-    LayoutModule,
+    LayoutModule, MatProgressSpinnerModule, 
   ]
 })
 export class AngularModulesModule { }
