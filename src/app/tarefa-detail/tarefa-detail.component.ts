@@ -8,8 +8,7 @@ import { Tarefa } from '../tarefa';
 
 @Component({
   selector: 'app-tarefa-detail',
-  templateUrl: './tarefa-detail.component.html',
-  styleUrls: ['./tarefa-detail.component.css']
+  templateUrl: './tarefa-detail.component.html'
 })
 export class TarefaDetailComponent implements OnInit {
   @Input() tarefa: Tarefa;

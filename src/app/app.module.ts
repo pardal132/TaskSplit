@@ -12,7 +12,6 @@ import { TarefaEditComponent } from './tarefa-edit/tarefa-edit.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { AppRoutingModule } from './/app-routing.module';
-import { HomeComponent } from './home/home.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { AngularModulesModule } from './/angular-modules.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,7 +28,6 @@ import { LoadingComponent } from './loading/loading.component';
     TarefaNewComponent,
     TarefaEditComponent,
     MessagesComponent,
-    HomeComponent,
     RankingComponent,
     LoadingComponent
   ],

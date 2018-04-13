@@ -7,8 +7,7 @@ import { Tarefa } from '../tarefa';
 
 @Component({
   selector: 'app-tarefa-new',
-  templateUrl: './tarefa-new.component.html',
-  styleUrls: ['./tarefa-new.component.css']
+  templateUrl: './tarefa-new.component.html'
 })
 export class TarefaNewComponent implements OnInit {
   tarefa: Tarefa;

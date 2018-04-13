@@ -16,12 +16,16 @@ const httpOptions = {
 
 @Injectable()
 export class TarefaService {
-
-  // https://angular.io/tutorial/toh-pt6
+  cache: Tarefa[];
+  cached: boolean;
+  
   constructor(
     private messageService: MessageService,
     private http: HttpClient
-  ) { }
+  ) {
+    this.cache = [];
+    this.cached = false;
+  }
 
   private api = 'http://tasksplit.azurewebsites.net/api';
   private log(message: string): void{
@@ -29,37 +33,31 @@ export class TarefaService {
   }
   
   getTarefas(): Observable<Tarefa[]>{
-    return this.http.get<Tarefa[]>(this.api+'/tarefas')
-      .pipe(
-        tap(tarefas => this.log('pegou tarefas')),
-        catchError(this.handleError('tarefaService',[]))
-      );
-  }
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+    const url = this.api+'/tarefas';
+    if(this.cached){
+      return of(this.cache);
+    }else{
+      return this.http.get<Tarefa[]>(this.api+'/tarefas')
+        .pipe(
+          tap(T => {this.cached = true; this.cache = T}),
+          catchError(this.handleError('tarefaService',[]))
+        );
+    }
   }
 
   getTarefa(id: string): Observable<Tarefa>{
     const url = this.api+'/busca';
-    var busca = {id:id};
-    return this.http.post<Tarefa>(url, busca, httpOptions).pipe(
-      tap(_ => this.log(`pegou tarefa id=${id}`)),
-      catchError(this.handleError<Tarefa>(`getTarefa id=${id}`))
-    );
+    if(this.cached){
+      return of([this.cache.find((el,i,ar) => {
+        return el.idTarefa = id;
+      })]);
+    }else{
+      var busca = {id:id};
+      return this.http.post<Tarefa>(url, busca, httpOptions).pipe(
+        tap(_ => this.log(`pegou tarefa id=${id}`)),
+        catchError(this.handleError<Tarefa>(`getTarefa id=${id}`))
+      );
+    }
   }
 
   updateTarefa(tarefa: Tarefa): Observable<any> {
@@ -103,4 +101,22 @@ export class TarefaService {
       catchError(this.handleError<Tarefa>('newTarefa'))      
     );
   }
+  
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
 }

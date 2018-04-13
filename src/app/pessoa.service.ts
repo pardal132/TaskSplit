@@ -16,17 +16,49 @@ const httpOptions = {
 
 @Injectable()
 export class PessoaService {
-
+  cache: Pessoa[];
+  cached: boolean;
+  
   constructor(
     private messageService: MessageService,
     private http: HttpClient
-  ) { }
+  ) {
+    this.cache = [];
+    this.cached = false;
+  }
 
   private api = 'http://tasksplit.azurewebsites.net/api';
   private log(message: string): void{
     this.messageService.add('pessoaService: '+message);
   }
 
+  getPessoas(): Observable<Pessoa[]>{
+    const url = this.api+'/pessoas';
+    if(this.cached){
+      return of(this.cache);
+    }else{
+      return this.http.post<Pessoa[]>(url, {'orderBy':'points'}, httpOptions).pipe(
+        tap(P => {this.cached = true; this.cache = P}),
+        catchError(this.handleError(`getPessoas`,[]))
+      );
+    }
+  }
+  
+  getPessoa(name: string): Observable<Pessoa>{
+    const url = this.api+'/pessoas';
+    if(this.cached){
+      return of([this.cache.find((el,i,ar) => {
+        return el.name == name;
+      })]);
+    }else{
+      var busca = {name:name};
+      return this.http.post<Pessoa>(url, busca, httpOptions).pipe(
+        tap(_ => this.log(`pegou pessoa`)),
+        catchError(this.handleError<Pessoa>(`getPessoas`))
+      );
+    }
+  }
+  
   /**
    * Handle Http operation that failed.
    * Let the app continue.
@@ -42,22 +74,5 @@ export class PessoaService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
-  }
-
-  getPessoas(): Observable<Pessoa[]>{
-    const url = this.api+'/pessoas';
-    return this.http.post<Pessoa[]>(url, {'orderBy':'points'}, httpOptions).pipe(
-      tap(_ => this.log(`pegou pessoa`)),
-      catchError(this.handleError(`getPessoas`,[]))
-    );
-  }
-  
-  getPessoa(name: string): Observable<Pessoa>{
-    const url = this.api+'/pessoas';
-    var busca = {name:name};
-    return this.http.post<Pessoa>(url, busca, httpOptions).pipe(
-      tap(_ => this.log(`pegou pessoa`)),
-      catchError(this.handleError<Pessoa>(`getPessoas`))
-    );
   }
 }

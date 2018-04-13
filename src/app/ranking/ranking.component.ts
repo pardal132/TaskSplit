@@ -6,8 +6,7 @@ import { LoadingService } from '../loading.service';
 
 @Component({
   selector: 'app-ranking',
-  templateUrl: './ranking.component.html',
-  styleUrls: ['./ranking.component.css']
+  templateUrl: './ranking.component.html'
 })
 export class RankingComponent implements OnInit {
   pessoas: Pessoa[];
