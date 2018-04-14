@@ -1,13 +1,15 @@
 export class Tarefa {
   id: string;
-  taskName: string;
-  points: number;
-  idPessoa: any;
-  idTarefa: any;
+  name: string;
   description: string;
-  status: string;
-  comment: any;
-  personName: any;
+  points: number;
   doBefore: any;
   createdAt: any;
+  people: {
+    id: string;
+    name: string;
+    status: string;
+    comment: string;
+    idAtual: string;
+  }[];
 }

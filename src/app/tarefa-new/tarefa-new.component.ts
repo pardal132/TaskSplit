@@ -19,19 +19,7 @@ export class TarefaNewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tarefa = {
-      id: null,
-      idTarefa: null,
-      idPessoa: null,
-      createdAt: null,
-      taskName: null,
-      points: null,
-      description: null,
-      status: null,
-      comment: null,
-      personName: null,
-      doBefore: null
-    }
+    this.tarefa = {} as Tarefa;
   }
 
   save(): void{
@@ -43,12 +31,12 @@ export class TarefaNewComponent implements OnInit {
           .subscribe(p=>{
             var nova = this.tarefa;
             nova['idPessoa'] = [p[0]['id']];
-            this.tarefaService.newTarefa(this.tarefa)
-                .subscribe(()=>this.goBack());
+            //this.tarefaService.newTarefa(this.tarefa)
+                //.subscribe(()=>this.goBack());
           });
     }else{
-      this.tarefaService.newTarefa(this.tarefa)
-          .subscribe(()=> this.goBack());
+      //this.tarefaService.newTarefa(this.tarefa)
+          //.subscribe(()=> this.goBack());
     }
   }
 

@@ -2,11 +2,17 @@
    <button mat-mini-fab color="primary" routerLink="/nova">+</button>
 </div>
 <div>
-   <mat-card *ngFor="let tarefa of tarefas" routerLink="/tarefa/{{tarefa.idTarefa}}">
+   <mat-card *ngFor="let tarefa of tarefas" routerLink="/tarefa/{{tarefa.id}}">
       <mat-card-header>
          <button mat-card-avatar mat-mini-fab class="mat-elevation-z0">{{tarefa.points}}</button>
-         <mat-card-title>{{tarefa.taskName | uppercase}}<span *ngIf="tarefa.status"> ({{tarefa.status}})</span></mat-card-title>
-         <mat-card-subtitle>{{tarefa.personName}}<span *ngIf="tarefa.doBefore"> - {{tarefa.doBefore}}</span></mat-card-subtitle>
+         <mat-card-title>{{tarefa.name | uppercase}}</mat-card-title>
+         <mat-card-subtitle>
+            <span *ngIf="tarefa.doBefore">prazo: {{tarefa.doBefore}} - </span>
+            <span *ngFor="let pessoa of tarefa.people">
+               <span *ngIf="tarefa.people.indexOf(pessoa) != 0">, </span>
+               {{pessoa.name}}<span *ngIf="pessoa.status">({{pessoa.status}})</span>
+            </span>
+         </mat-card-subtitle>
       </mat-card-header>
    </mat-card>
 </div>

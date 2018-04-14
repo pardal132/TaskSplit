@@ -47,9 +47,9 @@ export class PessoaService {
   getPessoa(name: string): Observable<Pessoa>{
     const url = this.api+'/pessoas';
     if(this.cached){
-      return of([this.cache.find((el,i,ar) => {
+      return of(this.cache.find((el,i,ar) => {
         return el.name == name;
-      })]);
+      }));
     }else{
       var busca = {name:name};
       return this.http.post<Pessoa>(url, busca, httpOptions).pipe(

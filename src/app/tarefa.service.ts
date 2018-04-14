@@ -48,9 +48,9 @@ export class TarefaService {
   getTarefa(id: string): Observable<Tarefa>{
     const url = this.api+'/busca';
     if(this.cached){
-      return of([this.cache.find((el,i,ar) => {
-        return el.idTarefa = id;
-      })]);
+      return of(this.cache.find((el) => {
+        return el.id == id;
+      }));
     }else{
       var busca = {id:id};
       return this.http.post<Tarefa>(url, busca, httpOptions).pipe(

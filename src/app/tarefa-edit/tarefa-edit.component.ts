@@ -46,8 +46,8 @@ export class TarefaEditComponent implements OnInit {
           .subscribe(p=>{
             var nova = this.tarefa;
             nova['idPessoa'] = [p[0]['id']];
-            this.tarefaService.updateTarefa(nova)
-                .subscribe(()=> this.goBack());
+            //this.tarefaService.updateTarefa(nova)
+                //.subscribe(()=> this.goBack());
           });
     }else{
       this.tarefaService.updateTarefa(this.tarefa)
