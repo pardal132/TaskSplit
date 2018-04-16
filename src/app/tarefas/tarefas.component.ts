@@ -32,13 +32,22 @@ export class TarefasComponent implements OnInit {
               return false;
             return true;
           }).sort((a,b)=>{
-            if('doBefore' in a && 'doBefore' in b
-               && a.doBefore < b.doBefore){
-              return -1;
-            }
+            if(a.doBefore != null){
+              if(b.doBefore != null){
+                if(a.doBefore < b.doBefore){
+                  return -1; // a,b
+                }else{
+                  return 1; // b,a
+                }
+              }else{
+                return -1; // a,b
+              }
+            }else if(b.doBefore != null){
+              return 1; // b,a
+            } // END doBefore
             if(a.createdAt < b.createdAt){
-              return 1;
-            }
+              return 1; // b,a
+            } // END createdAt
             return 0;
           });
           this.loading.stop();
