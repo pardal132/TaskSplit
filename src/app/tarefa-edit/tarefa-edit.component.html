@@ -1,45 +1,38 @@
 <div *ngIf="tarefa">
-   <!-- <mat-card>
-        <mat-card-header>
-        <button mat-card-avatar mat-mini-fab class="mat-elevation-z0">{{tarefa.points}}</button>
-        <mat-card-title>{{tarefa.taskName | uppercase}}<span *ngIf="tarefa.status"> ({{tarefa.status}})</span></mat-card-title>
-        <mat-card-subtitle>{{tarefa.personName}}<span *ngIf="tarefa.doBefore"> - {{tarefa.doBefore}}</span></mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-        <div *ngIf="tarefa.comment">
-        <p>{{tarefa.comment}}</p>
-        <p>&nbsp;</p>
-        </div>
-        <p>{{tarefa.description}}</p>
-        </mat-card-content>
-        </mat-card> -->
-
    <mat-card>
       <mat-card-content>         
          <form>
-            <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
-               <mat-form-field fxFlex>
-                  <input matInput name="taskName" placeholder="Tarefa" [(ngModel)]="tarefa.taskName">
-               </mat-form-field><mat-form-field fxFlex>
-                  <input matInput name="doBefore" placeholder="Prazo" [(ngModel)]="tarefa.doBefore">
-               </mat-form-field>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
-               <mat-form-field fxFlex="25">
-                  <input matInput name="points" placeholder="Pontos" [(ngModel)]="tarefa.points">
-               </mat-form-field><mat-form-field fxFlex="50">
-                  <input matInput name="personName" placeholder="Responsável" [(ngModel)]="tarefa.personName">
-               </mat-form-field><mat-form-field fxFlex="25">
-                  <input matInput name="status" placeholder="Status" [(ngModel)]="tarefa.status">
-               </mat-form-field>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
                <mat-form-field fxFlex="50">
+                  <input matInput required name="name" placeholder="Tarefa" [(ngModel)]="tarefa.name">
+               </mat-form-field><mat-form-field fxFlex="25">
+                  <input matInput name="points" placeholder="Pontos" [(ngModel)]="tarefa.points">
+               </mat-form-field><mat-form-field fxFlex="25">
+                  <input matInput disabled name="doBefore" placeholder="Prazo" [(ngModel)]="tarefa.doBefore">
+               </mat-form-field>
+            </div>
+            <div fxLayout="row">
+               <mat-form-field fxFlex="100">
                   <textarea matInput name="description" placeholder="Descrição" [(ngModel)]="tarefa.description"></textarea>
                </mat-form-field>
-               <mat-form-field fxFlex="50">
-                  <textarea matInput name="comment" placeholder="Comentário" [(ngModel)]="tarefa.comment"></textarea>
+            </div>
+            <div *ngFor="let pessoa of tarefa.people; let i = index;" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+               <mat-form-field fxFlex="25">
+                  <mat-select name="name_{{i}}" placeholder="Responsável" [(ngModel)]="pessoa.id">
+                     <mat-option>Ninguém</mat-option>
+                     <mat-option *ngFor="let p of pessoas" [value]="p.id">
+                        {{p.name}}
+                     </mat-option>
+                  </mat-select>
+               </mat-form-field><mat-form-field fxFlex="25">
+                  <input matInput name="status_{{i}}" placeholder="Status" [(ngModel)]="pessoa.status">
                </mat-form-field>
+               <mat-form-field fxFlex="50">
+                  <input matInput name="comment_{{i}}" placeholder="Comentário" [(ngModel)]="pessoa.comment">
+               </mat-form-field>
+            </div>
+            <div fxLayout="row">
+               <button fxFlex="100" mat-button (click)="adcPessoa()">adicionar responsável</button>
             </div>
          </form>
       </mat-card-content>

@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
+div>mat-card:only-child>mat-card-header{
+    padding-bottom: 20px;
+}

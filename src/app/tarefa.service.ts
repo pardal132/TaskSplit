@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Tarefa } from './tarefa';
+import { Tarefa, ResponseJSON, TarefaJSON } from './tarefa';
 import { MessageService } from './message.service';
 
 const httpOptions = {
@@ -45,60 +45,41 @@ export class TarefaService {
     }
   }
 
-  getTarefa(id: string): Observable<Tarefa>{
+  getTarefa(id: string): Observable<Tarefa[]>{
     const url = this.api+'/busca';
     if(this.cached){
-      return of(this.cache.find((el) => {
+      return of([this.cache.find((el) => {
         return el.id == id;
-      }));
+      })]);
     }else{
       var busca = {id:id};
-      return this.http.post<Tarefa>(url, busca, httpOptions).pipe(
+      return this.http.post<Tarefa[]>(url, busca, httpOptions).pipe(
         tap(_ => this.log(`pegou tarefa id=${id}`)),
-        catchError(this.handleError<Tarefa>(`getTarefa id=${id}`))
+        catchError(this.handleError<Tarefa[]>(`getTarefa id=${id}`))
       );
     }
   }
 
-  updateTarefa(tarefa: Tarefa): Observable<any> {
-    var nova = {};
-    [{ a: 'idTarefa', b: 'id' },
-     { a: 'description', b: 'description' },
-     { a: 'taskName', b: 'name' },
-     { a: 'doBefore', b: 'doBefore' },
-     { a: 'comment', b: 'comment' },
-     { a: 'status', b: 'status' },
-     { a: 'idPessoa', b: 'people' },
-     { a: 'points', b: 'points' }
-    ].forEach(t => {
-      if (t.a in tarefa) {
-        nova[t.b] = tarefa[t.a];
-      }
-    });
-    return this.http.put(this.api+'/tarefas',nova, httpOptions).pipe(
-      tap(_ => this.log(`update tarefa`)),
-      catchError(this.handleError<any>('updateTarefa'))
+  updateTarefa(tarefa: TarefaJSON): Observable<ResponseJSON> {
+    return this.http.put<ResponseJSON>(this.api+'/tarefas',tarefa, httpOptions).pipe(
+      tap(res => {
+        if(res.status == 200) this.refreshCache();
+      }),
+      catchError(this.handleError<ResponseJSON>('updateTarefa'))
     );
   }
 
-  newTarefa(tarefa: Tarefa): Observable<Tarefa> {
-    var nova = {};
-    [{ a: 'personName', b: 'people' },
-     { a: 'description', b: 'description' },
-     { a: 'taskName', b: 'name' },
-     { a: 'doBefore', b: 'doBefore' },
-     { a: 'comment', b: 'comment' },
-     { a: 'status', b: 'status' },
-     { a: 'idPessoa', b: 'people' },
-     { a: 'points', b: 'points' }
-    ].forEach(t => {
-      if (t.a in tarefa) {
-        nova[t.b] = tarefa[t.a];
-      }
-    });
-    return this.http.post<Tarefa>(this.api+'/tarefas', nova, httpOptions).pipe(
-      tap(_ => this.log(`nova tarefa`)),
-      catchError(this.handleError<Tarefa>('newTarefa'))      
+  refreshCache():void{
+    this.cached = false;
+    this.getTarefas();
+  }
+  
+  newTarefa(tarefa: TarefaJSON): Observable<ResponseJSON> {
+    return this.http.post<ResponseJSON>(this.api+'/tarefas', tarefa, httpOptions).pipe(
+      tap(res => {
+        if(res.status == 200) this.refreshCache();
+      }),
+      catchError(this.handleError<ResponseJSON>('newTarefa'))      
     );
   }
   

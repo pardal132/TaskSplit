@@ -2,20 +2,22 @@
    <mat-card>
       <mat-card-header>
          <button mat-card-avatar mat-mini-fab class="mat-elevation-z0">{{tarefa.points}}</button>
-         <mat-card-title>{{tarefa.taskName | uppercase}}<span *ngIf="tarefa.status"> ({{tarefa.status}})</span></mat-card-title>
-         <mat-card-subtitle>{{tarefa.personName}}<span *ngIf="tarefa.doBefore"> - {{tarefa.doBefore}}</span></mat-card-subtitle>
+         <mat-card-title>{{tarefa.name | uppercase}}</mat-card-title>
+         <mat-card-subtitle *ngIf="tarefa.doBefore">{{tarefa.doBefore}}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
-         <div fxFlex>
-            <mat-card><mat-card-content>{{tarefa.description}}</mat-card-content></mat-card>
-         </div>
-         <div fxFlex>
-            <mat-card><mat-card-content>{{tarefa.comment}}</mat-card-content></mat-card>
+      <mat-card-content>
+         <div fxLayout="column" fxLayoutGap="10px">
+            <div>{{tarefa.description}}</div>
+            <mat-card *ngFor="let pessoa of tarefa.people">
+               <span>{{pessoa.name}}</span>
+               <span *ngIf="pessoa.status">({{pessoa.status}})</span>
+               <span *ngIf="pessoa.comment">: {{pessoa.comment}}</span>
+            </mat-card>
          </div>
       </mat-card-content>
       <mat-card-actions>
          <button mat-button (click)="goBack()">voltar</button>
-         <button mat-raised-button routerLink="/edit/{{tarefa.idTarefa}}">Editar</button>
+         <button mat-raised-button routerLink="/edit/{{tarefa.id}}">Editar</button>
       </mat-card-actions>
    </mat-card>
 </div>

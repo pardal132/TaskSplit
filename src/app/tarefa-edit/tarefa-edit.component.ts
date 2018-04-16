@@ -5,14 +5,16 @@ import { Location } from '@angular/common';
 import { TarefaService } from '../tarefa.service';
 import { PessoaService } from '../pessoa.service';
 import { LoadingService } from '../loading.service';
-import { Tarefa } from '../tarefa';
+import { TarefaJSON } from '../tarefa';
+import { Pessoa } from '../pessoa';
 
 @Component({
   selector: 'app-tarefa-edit',
   templateUrl: './tarefa-edit.component.html'
 })
 export class TarefaEditComponent implements OnInit {
-  @Input() tarefa: Tarefa;
+  @Input() tarefa: TarefaJSON;
+  pessoas: Pessoa[];
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +26,8 @@ export class TarefaEditComponent implements OnInit {
 
   ngOnInit() {
     this.loadingService.start();
+    this.pessoaService.getPessoas()
+        .subscribe(pessoas => this.pessoas = pessoas);
     this.getTarefa();
   }
 
@@ -40,18 +44,15 @@ export class TarefaEditComponent implements OnInit {
     this.location.back();
   }
 
+  adcPessoa(): void{
+    this.tarefa.people.push({id:'',status:'',comment:''});
+  }
+  
   save(): void{
-    if('personName' in this.tarefa && this.tarefa['personName'] != null){
-      this.pessoaService.getPessoa(this.tarefa['personName'])
-          .subscribe(p=>{
-            var nova = this.tarefa;
-            nova['idPessoa'] = [p[0]['id']];
-            //this.tarefaService.updateTarefa(nova)
-                //.subscribe(()=> this.goBack());
-          });
-    }else{
-      this.tarefaService.updateTarefa(this.tarefa)
-          .subscribe(()=> this.goBack());
-    }
+    this.tarefa.people = this.tarefa.people.filter(e=>e.id != undefined);
+    this.tarefaService.updateTarefa(this.tarefa)
+        .subscribe(res => {
+          if(res.status == 200) this.goBack();
+        });
   }
 }

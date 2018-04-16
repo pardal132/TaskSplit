@@ -13,3 +13,20 @@ export class Tarefa {
     idAtual: string;
   }[];
 }
+
+export class ResponseJSON{
+  status: number;
+  text: string;
+}
+
+export class TarefaJSON{
+  name: string;
+  description: string;
+  points: number;
+  doBefore: any;
+  people: {
+    id: string;
+    status: string;
+    comment: string;
+  }[];  
+}
