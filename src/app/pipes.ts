@@ -11,3 +11,16 @@ export class FormatStatusPipe implements PipeTransform {
     return map[value];
   }
 }
+
+@Pipe({name: 'isLate'})
+export class IsLatePipe implements PipeTransform {
+  transform(value: date): boolean {
+    //se não tiver prazo, não está atrasada
+    if(value == null) return false;
+    //compara com a data atual
+    const hj = new Date()
+    if(new Date(value) > hj) return false;
+    return true;
+  }
+}
+

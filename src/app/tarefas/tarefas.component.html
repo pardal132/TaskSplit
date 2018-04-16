@@ -4,7 +4,7 @@
 <div>
    <mat-card *ngFor="let tarefa of tarefas" routerLink="/tarefa/{{tarefa.id}}">
       <mat-card-header>
-         <button mat-card-avatar mat-mini-fab class="mat-elevation-z0">{{tarefa.points}}</button>
+         <button mat-card-avatar mat-mini-fab class="mat-elevation-z0" color="{{(tarefa.doBefore | isLate) && 'warn' || 'accent'}}">{{tarefa.points}}</button>
          <mat-card-title><span *ngIf="tarefa.doBefore">({{tarefa.doBefore | date:"d/MMM"}}) </span>{{tarefa.name | uppercase}}</mat-card-title>
          <mat-card-subtitle>
             <span *ngFor="let pessoa of tarefa.people">

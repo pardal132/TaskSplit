@@ -1,7 +1,7 @@
 <div *ngIf="tarefa">
    <mat-card>
       <mat-card-header>
-         <button mat-card-avatar mat-mini-fab class="mat-elevation-z0">{{tarefa.points}}</button>
+         <button mat-card-avatar mat-mini-fab class="mat-elevation-z0" color="{{(tarefa.doBefore | isLate) && 'warn' || 'accent'}}">{{tarefa.points}}</button>
          <mat-card-title>{{tarefa.name | uppercase}}</mat-card-title>
          <mat-card-subtitle *ngIf="tarefa.doBefore">prazo: {{tarefa.doBefore | date:"d/MMM/yyyy"}}</mat-card-subtitle>
       </mat-card-header>

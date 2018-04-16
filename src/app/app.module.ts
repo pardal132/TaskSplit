@@ -19,7 +19,7 @@ import { PessoaService } from './pessoa.service';
 import { LoadingService } from './loading.service';
 import { LoadingComponent } from './loading/loading.component';
 
-import { FormatStatusPipe } from './pipes';
+import { FormatStatusPipe, IsLatePipe } from './pipes';
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
@@ -35,7 +35,8 @@ registerLocaleData(localePt);
     MessagesComponent,
     RankingComponent,
     LoadingComponent,
-    FormatStatusPipe
+    FormatStatusPipe,
+    IsLatePipe
   ],
   imports: [
     NoopAnimationsModule,
