@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 
 import { TarefaService } from '../tarefa.service';
 import { PessoaService } from '../pessoa.service';
+import { LoadingService } from '../loading.service';
 import { TarefaJSON } from '../tarefa';
 import { Pessoa } from '../pessoa';
 
@@ -13,10 +14,16 @@ import { Pessoa } from '../pessoa';
 export class TarefaNewComponent implements OnInit {
   tarefa: TarefaJSON;
   pessoas: Pessoa[];
+  status = [
+    {value:-1,name:'incompleta'},
+    {value:0,name:'aguardando resposta'},
+    {value:1,name:'completa'}
+  ];
   
   constructor(
     private tarefaService: TarefaService,
     private pessoaService: PessoaService,
+    private loading: LoadingService,
     private location: Location
   ) { }
 
@@ -30,14 +37,16 @@ export class TarefaNewComponent implements OnInit {
   }
 
   adcPessoa(): void{
-    this.tarefa.people.push({id:'',status:'',comment:''});
+    this.tarefa.people.push({id:'',status:-1,comment:''});
   }
   
   save(): void{
     this.tarefa.people = this.tarefa.people.filter(e=> e.id != undefined);
+    this.loading.start();
     this.tarefaService.newTarefa(this.tarefa)
         .subscribe(res=> {
-          if(res.status == 200) this.goBack();
+          this.loading.stop();
+          if(res.status == 201) this.goBack();
         });
   }
 

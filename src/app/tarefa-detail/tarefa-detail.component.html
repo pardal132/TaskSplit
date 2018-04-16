@@ -10,7 +10,7 @@
             <div>{{tarefa.description}}</div>
             <mat-card *ngFor="let pessoa of tarefa.people">
                <span>{{pessoa.name}}</span>
-               <span *ngIf="pessoa.status">({{pessoa.status}})</span>
+               <span>({{pessoa.status | formatStatus}})</span>
                <span *ngIf="pessoa.comment">: {{pessoa.comment}}</span>
             </mat-card>
          </div>

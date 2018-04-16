@@ -17,11 +17,11 @@ export class TarefaDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private tarefaService: TarefaService,
     private location: Location,
-    private loadingService: LoadingService
+    private loading: LoadingService
   ) { }
 
   ngOnInit() {
-    this.loadingService.start();
+    this.loading.start();
     this.getTarefa();
   }
 
@@ -30,7 +30,7 @@ export class TarefaDetailComponent implements OnInit {
     this.tarefaService.getTarefa(id)
         .subscribe(t =>{
           this.tarefa = t[0];
-          this.loadingService.stop();
+          this.loading.stop();
         });
   }
 

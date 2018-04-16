@@ -8,7 +8,7 @@ export class Tarefa {
   people: {
     id: string;
     name: string;
-    status: string;
+    status: number;
     comment: string;
     idAtual: string;
   }[];
@@ -26,7 +26,7 @@ export class TarefaJSON{
   doBefore: any;
   people: {
     id: string;
-    status: string;
+    status: number;
     comment: string;
   }[];  
 }

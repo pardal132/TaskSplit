@@ -12,11 +12,11 @@ export class RankingComponent implements OnInit {
   pessoas: Pessoa[];
   constructor(
     private pessoaService: PessoaService,
-    private loadingService: LoadingService
+    private loading: LoadingService
   ) { }
 
   ngOnInit() {
-    this.loadingService.start();
+    this.loading.start();
     this.getPessoas();
   }
 
@@ -24,7 +24,7 @@ export class RankingComponent implements OnInit {
     this.pessoaService.getPessoas()
         .subscribe(pessoas => {
           this.pessoas = pessoas;
-          this.loadingService.stop();
+          this.loading.stop();
         });
   }
 }

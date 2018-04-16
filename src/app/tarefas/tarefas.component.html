@@ -10,7 +10,7 @@
             <span *ngIf="tarefa.doBefore">prazo: {{tarefa.doBefore}} - </span>
             <span *ngFor="let pessoa of tarefa.people">
                <span *ngIf="tarefa.people.indexOf(pessoa) != 0">, </span>
-               {{pessoa.name}}<span *ngIf="pessoa.status">({{pessoa.status}})</span>
+               {{pessoa.name}}<span>({{pessoa.status | formatStatus}})</span>
             </span>
          </mat-card-subtitle>
       </mat-card-header>

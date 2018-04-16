@@ -13,11 +13,11 @@ export class TarefasComponent implements OnInit {
 
   constructor(
     private tarefaService: TarefaService,
-    private loadingService: LoadingService
+    private loading: LoadingService
   ) { }
 
   ngOnInit() {
-    this.loadingService.start()
+    this.loading.start()
     this.getTarefas();
   }
 
@@ -25,7 +25,7 @@ export class TarefasComponent implements OnInit {
     this.tarefaService.getTarefas()
         .subscribe(tarefas => {
           this.tarefas = tarefas;
-          this.loadingService.stop();
+          this.loading.stop();
         });
   }
 }

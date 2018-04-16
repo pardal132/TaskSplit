@@ -19,6 +19,7 @@ import { PessoaService } from './pessoa.service';
 import { LoadingService } from './loading.service';
 import { LoadingComponent } from './loading/loading.component';
 
+import { FormatStatusPipe } from './pipes';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LoadingComponent } from './loading/loading.component';
     TarefaEditComponent,
     MessagesComponent,
     RankingComponent,
-    LoadingComponent
+    LoadingComponent,
+    FormatStatusPipe
   ],
   imports: [
     NoopAnimationsModule,
