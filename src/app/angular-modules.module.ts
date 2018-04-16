@@ -12,6 +12,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
 
 import {LayoutModule} from '@angular/cdk/layout';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -21,13 +23,15 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatButtonModule, MatCheckboxModule, MatTabsModule, MatToolbarModule,
     MatCardModule, MatFormFieldModule, MatSnackBarModule, MatChipsModule,
     MatDividerModule, MatIconModule, MatInputModule, FlexLayoutModule,
-    LayoutModule, MatProgressSpinnerModule, MatSelectModule, 
+    LayoutModule, MatProgressSpinnerModule, MatSelectModule, MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     MatButtonModule, MatCheckboxModule, MatTabsModule, MatToolbarModule,
     MatCardModule, MatFormFieldModule, MatSnackBarModule, MatChipsModule,
     MatDividerModule, MatIconModule, MatInputModule, FlexLayoutModule,
-    LayoutModule, MatProgressSpinnerModule, MatSelectModule, 
+    LayoutModule, MatProgressSpinnerModule, MatSelectModule, MatDatepickerModule,
+    MatNativeDateModule,
   ]
 })
 export class AngularModulesModule { }

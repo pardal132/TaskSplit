@@ -24,7 +24,23 @@ export class TarefasComponent implements OnInit {
   getTarefas(): void{
     this.tarefaService.getTarefas()
         .subscribe(tarefas => {
-          this.tarefas = tarefas;
+          this.tarefas = tarefas.filter(t=>{
+            if(t.people.length == 0)
+              return true;
+            if(t.people.map(e=>e.status == 1)
+                .reduce((a,b)=>a&&b) == true)
+              return false;
+            return true;
+          }).sort((a,b)=>{
+            if('doBefore' in a && 'doBefore' in b
+               && a.doBefore < b.doBefore){
+              return -1;
+            }
+            if(a.createdAt < b.createdAt){
+              return 1;
+            }
+            return 0;
+          });
           this.loading.stop();
         });
   }

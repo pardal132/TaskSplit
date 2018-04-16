@@ -8,7 +8,9 @@
                </mat-form-field><mat-form-field fxFlex="25">
                   <input matInput name="points" placeholder="Pontos" [(ngModel)]="tarefa.points">
                </mat-form-field><mat-form-field fxFlex="25">
-                  <input matInput disabled name="doBefore" placeholder="Prazo" [(ngModel)]="tarefa.doBefore">
+                  <input matInput disabled [matDatepicker]="picker" name="doBefore" placeholder="Prazo" [(ngModel)]="tarefa.doBefore">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker touchUi="true" disabled="false"></mat-datepicker>
                </mat-form-field>
             </div>
             <div fxLayout="row">

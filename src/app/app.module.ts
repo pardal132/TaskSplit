@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -20,6 +20,10 @@ import { LoadingService } from './loading.service';
 import { LoadingComponent } from './loading/loading.component';
 
 import { FormatStatusPipe } from './pipes';
+
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -45,7 +49,8 @@ import { FormatStatusPipe } from './pipes';
     TarefaService,
     MessageService,
     PessoaService,
-    LoadingService
+    LoadingService,
+    { provide: LOCALE_ID, useValue: 'pt' }
   ],
   bootstrap: [AppComponent]
 })

@@ -3,3 +3,7 @@
 div>mat-card:only-child>mat-card-header{
     padding-bottom: 20px;
 }
+
+mat-calendar{
+    background: rgb(255,255,255);
+}
