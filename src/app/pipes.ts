@@ -14,7 +14,7 @@ export class FormatStatusPipe implements PipeTransform {
 
 @Pipe({name: 'isLate'})
 export class IsLatePipe implements PipeTransform {
-  transform(value: date): boolean {
+  transform(value: Date): boolean {
     //se não tiver prazo, não está atrasada
     if(value == null) return false;
     //compara com a data atual

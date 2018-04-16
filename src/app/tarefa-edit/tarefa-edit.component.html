@@ -2,12 +2,14 @@
    <mat-card>
       <mat-card-content>         
          <form>
-            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-               <mat-form-field fxFlex="50">
+            <div fxLayout.gt-xs="row" fxLayout.xs="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+               <mat-form-field fxFlex.sm="55" fxFlex.xs="100">
                   <input matInput required name="name" placeholder="Tarefa" [(ngModel)]="tarefa.name">
-               </mat-form-field><mat-form-field fxFlex="25">
+               </mat-form-field>
+               <mat-form-field fxFlex.sm="20" fxFlex.xs>
                   <input matInput name="points" placeholder="Pontos" [(ngModel)]="tarefa.points">
-               </mat-form-field><mat-form-field fxFlex="25">
+               </mat-form-field>
+               <mat-form-field fxFlex.sm="25" fxFlex.xs>
                   <input matInput disabled [matDatepicker]="picker" name="doBefore" placeholder="Prazo" [(ngModel)]="tarefa.doBefore">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker touchUi="true" disabled="false"></mat-datepicker>
@@ -18,22 +20,23 @@
                   <textarea matInput name="description" placeholder="Descrição" [(ngModel)]="tarefa.description"></textarea>
                </mat-form-field>
             </div>
-            <div *ngFor="let pessoa of tarefa.people; let i = index;" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-               <mat-form-field fxFlex="25">
+            <div fxLayout.gt-xs="row" fxLayout.xs="row wrap" *ngFor="let pessoa of tarefa.people; let i = index;" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+               <mat-form-field fxFlex.sm="25" fxFlex.xs>
                   <mat-select name="name_{{i}}" placeholder="Responsável" [(ngModel)]="pessoa.id">
                      <mat-option>Ninguém</mat-option>
                      <mat-option *ngFor="let p of pessoas" [value]="p.id">
                         {{p.name}}
                      </mat-option>
                   </mat-select>
-               </mat-form-field><mat-form-field fxFlex="25">
+               </mat-form-field>
+               <mat-form-field fxFlex.sm="25" fxFlex.xs>
                   <mat-select name="status_{{i}}" placeholder="Status" [(ngModel)]="pessoa.status">
                      <mat-option *ngFor="let s of status" [value]="s.value">
                         {{s.name}}
                      </mat-option>
                   </mat-select>
                </mat-form-field>
-               <mat-form-field fxFlex="50">
+               <mat-form-field fxFlex.sm="50" fxFlex.xs="100">
                   <input matInput name="comment_{{i}}" placeholder="Comentário" [(ngModel)]="pessoa.comment">
                </mat-form-field>
             </div>
@@ -42,7 +45,7 @@
             </div>
          </form>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions fxLayoutAlign="space-between center">
          <button mat-button (click)="goBack()">voltar</button>
          <button mat-raised-button (click)="save()">salvar</button>
       </mat-card-actions>
