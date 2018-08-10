@@ -1,8 +1,7 @@
 # TaskSplit - Front
 
-This project is the NodeJS front-end for the TaskSplit API
+Este projeto é o front-end feito em NodeJS para a API do TaskSplit, feito para uso com a Microsoft Azure para a Microsoft Imagine Cup 2018.
 
-## Build
+## Licença
 
-After cloning the repository, run `yarn install` to install the necessary node modules.
-
+GNU Affero General Public License v3 (AGPL-3.0)
