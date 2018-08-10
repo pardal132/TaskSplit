@@ -32,7 +32,9 @@ export class TarefaEditComponent implements OnInit {
   ngOnInit() {
     this.loading.start();
     this.pessoaService.getPessoas()
-        .subscribe(pessoas => this.pessoas = pessoas);
+        .subscribe(pessoas => {
+          this.pessoas = pessoas.sort((a,b)=>a.name.localeCompare(b.name));
+        });
     this.getTarefa();
   }
 

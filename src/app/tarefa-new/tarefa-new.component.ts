@@ -32,7 +32,7 @@ export class TarefaNewComponent implements OnInit {
     this.tarefa.people = [];
     this.pessoaService.getPessoas()
         .subscribe(pessoas => {
-          this.pessoas = pessoas;
+          this.pessoas = pessoas.sort((a,b)=>a.name.localeCompare(b.name));
         });
   }
 

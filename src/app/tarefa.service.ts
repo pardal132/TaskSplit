@@ -34,7 +34,7 @@ export class TarefaService {
   
   getTarefas(): Observable<Tarefa[]>{
     const url = this.api+'/tarefas';
-    if(this.cached){
+    if(this.cached == true){
       return of(this.cache);
     }else{
       return this.http.get<Tarefa[]>(this.api+'/tarefas')
@@ -47,7 +47,7 @@ export class TarefaService {
 
   getTarefa(id: string): Observable<Tarefa[]>{
     const url = this.api+'/busca';
-    if(this.cached){
+    if(this.cached == true){
       return of([this.cache.find((el) => {
         return el.id == id;
       })]);
@@ -77,7 +77,7 @@ export class TarefaService {
   newTarefa(tarefa: TarefaJSON): Observable<ResponseJSON> {
     return this.http.post<ResponseJSON>(this.api+'/tarefas', tarefa, httpOptions).pipe(
       tap(res => {
-        if(res.status == 200) this.refreshCache();
+        if(res.status == 201) this.refreshCache();
       }),
       catchError(this.handleError<ResponseJSON>('newTarefa'))      
     );
